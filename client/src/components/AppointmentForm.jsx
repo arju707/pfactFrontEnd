@@ -31,15 +31,17 @@ const AppointmentForm = ({
     }
 
     const updated = { ...appointments };
-    const currentAppointments = updated[selectedDate] || [];
+    const entry = { patient, doctor, time };
 
     if (editData) {
-      currentAppointments[editData.index] = { patient, doctor, time };
+      updated[editData.day][editData.index] = entry;
     } else {
-      currentAppointments.push({ patient, doctor, time });
+      if (!updated[selectedDate]) {
+        updated[selectedDate] = [];
+      }
+      updated[selectedDate].push(entry);
     }
 
-    updated[selectedDate] = currentAppointments;
     setAppointments(updated);
     localStorage.setItem("appointments", JSON.stringify(updated));
     onClose();
@@ -47,16 +49,16 @@ const AppointmentForm = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-900 text-black dark:text-white p-6 rounded-lg w-full max-w-md shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">
-          {editData ? "Edit Appointment" : "Add Appointment"} - Day {selectedDate}
+      <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
+        <h2 className="text-xl font-semibold mb-4 text-center">
+          {editData ? "Edit Appointment" : "Add Appointment"} – Day {selectedDate}
         </h2>
 
         <label className="block mb-1">Patient</label>
         <select
           value={patient}
           onChange={(e) => setPatient(e.target.value)}
-          className="w-full mb-3 border p-2 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+          className="w-full mb-3 border p-2 rounded"
         >
           <option value="">Select Patient</option>
           {patients.map((p) => (
@@ -68,7 +70,7 @@ const AppointmentForm = ({
         <select
           value={doctor}
           onChange={(e) => setDoctor(e.target.value)}
-          className="w-full mb-3 border p-2 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+          className="w-full mb-3 border p-2 rounded"
         >
           <option value="">Select Doctor</option>
           {doctors.map((d) => (
@@ -81,21 +83,21 @@ const AppointmentForm = ({
           type="time"
           value={time}
           onChange={(e) => setTime(e.target.value)}
-          className="w-full mb-4 border p-2 rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+          className="w-full mb-4 border p-2 rounded"
         />
 
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+            className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"
           >
             Cancel
           </button>
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
           >
-            Save
+            {editData ? "Update" : "Save"}
           </button>
         </div>
       </div>
