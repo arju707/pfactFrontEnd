@@ -29,7 +29,8 @@ const Login = () => {
       className="flex flex-col gap-4 m-auto items-start p-8 py-12 w-80 sm:w-[352px] rounded-lg shadow-xl border border-gray-200 bg-white mt-20"
     >
       <p className="text-2xl font-medium m-auto">
-        <span className="text-indigo-500">User</span> {state === "login" ? "Login" : "Sign Up"}
+        <span className="text-indigo-500">User</span>{" "}
+        {state === "login" ? "Login" : "Sign Up"}
       </p>
 
       {state === "register" && (
@@ -74,14 +75,20 @@ const Login = () => {
         {state === "register" ? (
           <>
             Already have an account?{" "}
-            <span onClick={() => setState("login")} className="text-indigo-500 cursor-pointer">
+            <span
+              onClick={() => setState("login")}
+              className="text-indigo-500 cursor-pointer"
+            >
               Click here
             </span>
           </>
         ) : (
           <>
             Create an account?{" "}
-            <span onClick={() => setState("register")} className="text-indigo-500 cursor-pointer">
+            <span
+              onClick={() => setState("register")}
+              className="text-indigo-500 cursor-pointer"
+            >
               Click here
             </span>
           </>

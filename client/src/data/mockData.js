@@ -9,5 +9,3 @@ export const doctors = [
   { id: 2, name: "Dr. Lakshmi" },
   { id: 3, name: "Dr. George" },
 ];
-
-

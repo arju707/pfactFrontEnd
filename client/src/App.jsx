@@ -24,7 +24,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/calendar" element={<Calendar isDark={isDark} setIsDark={setIsDark} />} />
+        <Route
+          path="/calendar"
+          element={<Calendar isDark={isDark} setIsDark={setIsDark} />}
+        />
       </Routes>
     </Router>
   );

@@ -10,7 +10,9 @@ import {
 
 const Calendar = ({ isDark, setIsDark }) => {
   const [selectedDate, setSelectedDate] = useState(null);
-  const [mobileDate, setMobileDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [mobileDate, setMobileDate] = useState(
+    format(new Date(), "yyyy-MM-dd")
+  );
   const [appointments, setAppointments] = useState(
     JSON.parse(localStorage.getItem("appointments")) || {}
   );
@@ -82,7 +84,13 @@ const Calendar = ({ isDark, setIsDark }) => {
       </div>
 
       <div className="hidden sm:grid grid-cols-7 text-center text-sm text-gray-500 font-medium mb-1">
-        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
       </div>
 
       <div className="hidden sm:grid grid-cols-7 gap-px bg-gray-200 dark:bg-gray-700 rounded overflow-hidden shadow">
@@ -90,7 +98,9 @@ const Calendar = ({ isDark, setIsDark }) => {
           <div
             key={index}
             className={`bg-white dark:bg-gray-900 h-32 p-2 flex flex-col justify-between border transition-all ${
-              day ? "hover:bg-blue-50 dark:hover:bg-gray-800 cursor-pointer" : "bg-gray-100 dark:bg-gray-800"
+              day
+                ? "hover:bg-blue-50 dark:hover:bg-gray-800 cursor-pointer"
+                : "bg-gray-100 dark:bg-gray-800"
             } ${isToday(day) ? "border-blue-500 border-2" : ""}`}
             onClick={() => day && openForm(day)}
           >
@@ -100,9 +110,12 @@ const Calendar = ({ isDark, setIsDark }) => {
 
             <div className="text-xs space-y-1 overflow-y-auto max-h-20 mt-1">
               {appointments[day]
-                ?.filter((appt) =>
-                  filterType === "all" ||
-                  appt[filterType]?.toLowerCase().includes(filterValue.toLowerCase())
+                ?.filter(
+                  (appt) =>
+                    filterType === "all" ||
+                    appt[filterType]
+                      ?.toLowerCase()
+                      .includes(filterValue.toLowerCase())
                 )
                 .map((appt, i) => (
                   <div
